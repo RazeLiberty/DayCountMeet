@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>15A084ED-3471-4E86-9819-A2CEB71578C6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DayCount</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9570636CF1613B5189046EEB15C8EA4365DA4EE6</key>
+		<string>https://github.com/RazeLiberty/DayCount.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DayCount/DayCount.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9570636CF1613B5189046EEB15C8EA4365DA4EE6</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RazeLiberty/DayCount.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9570636CF1613B5189046EEB15C8EA4365DA4EE6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9570636CF1613B5189046EEB15C8EA4365DA4EE6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DayCount</string>
+		</dict>
+	</array>
+</dict>
+</plist>
