@@ -22,14 +22,11 @@
 @property NSDate *setday;
 
 //タイマー
-//@property NSTimer *timer; //クイズ中の経過時間を生成する
-@property NSTimeInterval startTime;
+//@property NSTimer *timer;
+//@property NSTimeInterval startTime;
 @property float countTime;  //設定時間
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 - (IBAction)timerStart:(id)sender;
-
-//@property double count;
-
 
 //データ保存
 @property NSUserDefaults *userDefaults;
@@ -55,51 +52,22 @@
     _today = [NSDate date];
     NSLog(@"%@", _setday);
     
-    // NSUserDefaultsからデータを読み込む
+    
+    //-----------------NSMutableArrayにする予定-----------------//
+    
+    // (setday用)NSUserDefaultsからデータを読み込む
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     // _setdayの内容をNSDate型として取得
     _setday = [ud objectForKey:@"setday"];
     //初期dateに設定
     _datePicker.date = _setday;
     
-    
-    // NSUserDefaultsからデータを読み込む
+    // (betweendays用)NSUserDefaultsからデータを読み込む
     NSUserDefaults *Udefaults = [NSUserDefaults standardUserDefaults];
     // _betweendaysStrの内容をNSString型として取得
     _betweenLabel.text = [Udefaults objectForKey:@"betweendays"];
     
-    /*
-    //タイマー処理
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                              target:self
-                                            selector:@selector(time:)
-                                            userInfo:nil
-                                             repeats:YES];
-    _countTime = 10.0f;    //設定時間
-
-    self.timeLabel.text = @"00:00:00.0";
-  */
 }
-
- /*
--(void)time:(NSTimer*)timer{
-    if(_countTime>0){
-        _countTime -= 0.1f;
-    
-        [_timeLabel setText:[NSString stringWithFormat:@"%f",_countTime]]; // ラベルに時間を表示
-    }else{
-        [timer invalidate]; // タイマーを停止する
-        NSLog(@"Have a Nice Day!");
-    }
-    
- 
-    NSLog(@"time:%f", _countTime);
-    //タイマーが有効かどうか
-    NSString *str = [_timer isValid] ? @"yes" : @"no";
-    NSLog(@"isValid:%@", str);
- 
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -124,7 +92,10 @@
     [_userDefaults synchronize];
 }
 */
-//キーボードを非表示にする処理
+
+//================================================================================
+// returnしたらキーボードを非表示にする処理
+//================================================================================
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     // キーボードの非表示
@@ -133,7 +104,9 @@
     return NO;
 }
 
-//ピッカーの値を変えたら
+//================================================================================
+// ピッカーの値を変えたら
+//================================================================================
 - (IBAction)valueChanged:(id)sender {
     
 
@@ -160,6 +133,10 @@
     [Udefaults setObject:betweenStr forKey:@"betweendays"];  //セットした日付を"betweendays"キーで保存
 }
 
+
+//================================================================================
+// タイマー処理
+//================================================================================
 - (IBAction)timerStart:(id)sender {
     // タイマーが動いていたら初期化
     if([mTimer isValid]){
@@ -175,22 +152,17 @@
     }
     
 }
-
 - (void)timerSetUp {
     // 現在の時間を取得
     //self.startTime = [NSDate timeIntervalSinceReferenceDate];
-    
     _countTime = 10;    //設定時間
-    
     self.timeLabel.text = @"00:00:00.0";
     mTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                               target:self
                                             selector:@selector(timeCounter)
                                             userInfo:nil
                                              repeats:YES];
-    
 }
-
 - (void)timeCounter {
     
     if(_countTime>0){
@@ -215,6 +187,8 @@
     self.timeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d.%03d", hour, minute, second, milisecond];
 }
 
+
+
 @end
 
 //================================================================================
@@ -234,8 +208,8 @@
 {
     NSCalendar *calendar = [[NSCalendar alloc]
                             initWithCalendarIdentifier:NSGregorianCalendar];
-    startDate = [DateUtility adjustZeroClock:startDate withCalendar:calendar];
-    endDate = [DateUtility adjustZeroClock:endDate withCalendar:calendar];
+    //startDate = [DateUtility adjustZeroClock:startDate withCalendar:calendar];
+    //endDate = [DateUtility adjustZeroClock:endDate withCalendar:calendar];
     
     NSDateComponents *components = [calendar components:NSDayCalendarUnit
                                                fromDate:startDate
