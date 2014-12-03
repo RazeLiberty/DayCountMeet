@@ -21,6 +21,16 @@
 @property NSDate *today;
 @property NSDate *setday;
 
+//タイマー
+@property NSTimer *timer; //クイズ中の経過時間を生成する
+@property NSTimeInterval startTime;
+@property double countTime;  //設定時間
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+- (IBAction)timerStart:(id)sender;
+
+//@property double count;
+
+
 //データ保存
 @property NSUserDefaults *userDefaults;
 @property NSMutableArray *list;
@@ -30,7 +40,9 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    NSTimer *mTimer;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,9 +67,38 @@
     NSUserDefaults *Udefaults = [NSUserDefaults standardUserDefaults];
     // _betweendaysStrの内容をNSString型として取得
     _betweenLabel.text = [Udefaults objectForKey:@"betweendays"];
+    /*
+    //タイマー処理
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.000001f
+                                              target:self
+                                            selector:@selector(time:)
+                                            userInfo:nil
+                                             repeats:YES];
+    _countTime = 10.0f;    //設定時間
 
-    
+    self.timeLabel.text = @"00:00:00.000";
+    */
 }
+/*
+ 
+-(void)time:(NSTimer*)timer{
+    if(_countTime>0){
+        _countTime -= 0.000001f;
+    
+        [_timeLabel setText:[NSString stringWithFormat:@"%f",_countTime]]; // ラベルに時間を表示
+    }else{
+        [timer invalidate]; // タイマーを停止する
+        NSLog(@"Have a Nice Day!");
+    }
+    
+ 
+    NSLog(@"time:%f", _countTime);
+    //タイマーが有効かどうか
+    NSString *str = [_timer isValid] ? @"yes" : @"no";
+    NSLog(@"isValid:%@", str);
+ 
+}
+*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -117,6 +158,59 @@
     NSUserDefaults *Udefaults = [NSUserDefaults standardUserDefaults];  // 取得
     [Udefaults setObject:betweenStr forKey:@"betweendays"];  //セットした日付を"betweendays"キーで保存
 }
+
+- (IBAction)timerStart:(id)sender {
+    // タイマーが動いていたら初期化
+    if([_timer isValid]){
+        if(_timer != nil){
+            [_timer invalidate];
+            self.timeLabel.text = @"00:00:00.000";
+            _timer = nil;
+        }
+    }
+    //でなければタイマーセットアップ
+    else{
+        [self timerSetUp];
+    }
+    
+}
+
+- (void)timerSetUp {
+    // 現在の時間を取得
+    //self.startTime = [NSDate timeIntervalSinceReferenceDate];
+    
+    _countTime = 10.0f;    //設定時間
+    
+    self.timeLabel.text = @"00:00:00.000";
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.001
+                                              target:self
+                                            selector:@selector(timeCounter)
+                                            userInfo:nil
+                                             repeats:YES];
+    
+}
+
+- (void)timeCounter {
+    
+    if(_countTime>0){
+        _countTime -= 0.001;
+        
+        [_timeLabel setText:[NSString stringWithFormat:@"%f",_countTime]]; // ラベルに時間を表示
+    }else{
+        [mTimer invalidate]; // タイマーを停止する
+        NSLog(@"Have a Nice Day!");
+        self.timeLabel.text = @"Have a Nice Day!";
+    }
+    
+    double cTime = [NSDate timeIntervalSinceReferenceDate] - self.startTime;
+    int hour = cTime/(60*60);
+    // doubleで余りを出す計算をするときはfmod
+    int minute = fmod((cTime/60), 60);
+    int second = fmod(cTime, 60);
+    int milisecond = (cTime - floor(cTime))*1000;
+    self.timeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d.%03d", hour, minute, second, milisecond];
+}
+
 @end
 
 //================================================================================

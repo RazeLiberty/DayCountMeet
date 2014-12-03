@@ -43,12 +43,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12345" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3UM-vQ-f6o">
-                                <rect key="frame" x="-17" y="226" width="408" height="215"/>
+                                <rect key="frame" x="-17" y="122" width="408" height="215"/>
                                 <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="100"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ls9-fr-SvY">
+                                <rect key="frame" x="151" y="390" width="72" height="30"/>
+                                <state key="normal" title="TimerStart">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="timerStart:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="myC-Qi-oCS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVN-Ah-8pO">
+                                <rect key="frame" x="101" y="324" width="172" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,6 +74,7 @@
                         <outlet property="datePicker" destination="clc-uY-Eq4" id="Hnd-U2-1Rk"/>
                         <outlet property="setdayLabel" destination="QPZ-xN-jm7" id="Y4h-Ys-c6J"/>
                         <outlet property="textField" destination="yzB-hK-DGS" id="2rw-f8-Ov7"/>
+                        <outlet property="timeLabel" destination="rVN-Ah-8pO" id="eu4-cx-pBq"/>
                         <outlet property="todaylabel" destination="KwN-dc-g9T" id="gff-ID-RK5"/>
                     </connections>
                 </viewController>
