@@ -17,7 +17,11 @@
 @interface DateUtility: NSObject
 
 + (NSDate*)adjustZeroClock:(NSDate*)date withCalendar:(NSCalendar*)calendar;
++ (NSDate*)getYMDHMS:(NSDate*)date withCalendar:(NSCalendar*)calendar;
 + (NSInteger*)daysBetween:(NSDate*)startDate and:(NSDate*)endDate;
++ (NSInteger*)hourBetween:(NSDate*)startDate and:(NSDate*)endDate;
++ (NSInteger*)minuteBetween:(NSDate*)startDate and:(NSDate*)endDate;
++ (NSInteger*)secondBetween:(NSDate*)startDate and:(NSDate*)endDate;
 
 @end
 

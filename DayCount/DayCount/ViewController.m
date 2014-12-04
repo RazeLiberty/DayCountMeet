@@ -122,9 +122,13 @@
     
     //今日とセットした日の日数の差を取得
     NSInteger *betweendays = [DateUtility daysBetween:_today and:_setday];
-    NSLog(@"%d", betweendays);
+    NSInteger *betweenhour = [DateUtility hourBetween:_today and:_setday];
+    NSInteger *betweenminute = [DateUtility minuteBetween:_today and:_setday];
+    NSInteger *betweensecond = [DateUtility secondBetween:_today and:_setday];
+
+    NSLog(@"あと%d日 %d時間 %d分 %d秒", betweendays, betweenhour, betweenminute, betweensecond);
     //NSInteger to NSString
-    NSString *betweenStr = [[NSString alloc] initWithFormat:@"%d",betweendays];
+    NSString *betweenStr = [[NSString alloc] initWithFormat:@"あと%d日 %d時間 %d分 %d秒", betweendays, betweenhour, betweenminute, betweensecond];
     //日数差を表示
     _betweenLabel.text = betweenStr;
     
@@ -204,6 +208,16 @@
     return [calendar dateFromComponents:components];
 }
 
++ (NSDate*)getYMDHMS:(NSDate*)date withCalendar:(NSCalendar*)calendar
+{
+    NSDateComponents *components =
+    [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit |NSMinuteCalendarUnit | NSSecondCalendarUnit
+                fromDate:date];
+    return [calendar dateFromComponents:components];
+}
+//================================================================================
+//
+//================================================================================
 + (NSInteger*)daysBetween:(NSDate*)startDate and:(NSDate*)endDate
 {
     NSCalendar *calendar = [[NSCalendar alloc]
@@ -216,8 +230,60 @@
                                                  toDate:endDate
                                                 options:0];
     NSInteger *days = [components day];
+    NSInteger *hour = [components hour];
+    NSInteger *minute = [components minute];
+    NSInteger *second = [components second];
 
     
-    return days;
+    return days,hour,minute,second;
+}
+
++ (NSInteger*)hourBetween:(NSDate*)startDate and:(NSDate*)endDate
+{
+    NSCalendar *calendar = [[NSCalendar alloc]
+                            initWithCalendarIdentifier:NSGregorianCalendar];
+    //startDate = [DateUtility adjustZeroClock:startDate withCalendar:calendar];
+    //endDate = [DateUtility adjustZeroClock:endDate withCalendar:calendar];
+    
+    NSDateComponents *components = [calendar components:NSHourCalendarUnit
+                                               fromDate:startDate
+                                                 toDate:endDate
+                                                options:0];
+    NSInteger *hour = [components hour];
+
+    return hour;
+}
+
++ (NSInteger*)minuteBetween:(NSDate*)startDate and:(NSDate*)endDate
+{
+    NSCalendar *calendar = [[NSCalendar alloc]
+                            initWithCalendarIdentifier:NSGregorianCalendar];
+    //startDate = [DateUtility adjustZeroClock:startDate withCalendar:calendar];
+    //endDate = [DateUtility adjustZeroClock:endDate withCalendar:calendar];
+    
+    NSDateComponents *components = [calendar components:NSMinuteCalendarUnit
+                                               fromDate:startDate
+                                                 toDate:endDate
+                                                options:0];
+    NSInteger *minute = [components minute];
+    
+    return minute;
+}
+
++ (NSInteger*)secondBetween:(NSDate*)startDate and:(NSDate*)endDate
+{
+    NSCalendar *calendar = [[NSCalendar alloc]
+                            initWithCalendarIdentifier:NSGregorianCalendar];
+    //startDate = [DateUtility adjustZeroClock:startDate withCalendar:calendar];
+    //endDate = [DateUtility adjustZeroClock:endDate withCalendar:calendar];
+    
+    NSDateComponents *components = [calendar components:NSSecondCalendarUnit
+                                               fromDate:startDate
+                                                 toDate:endDate
+                                                options:0];
+    NSInteger *second = [components second];
+    
+    
+    return second;
 }
 @end
